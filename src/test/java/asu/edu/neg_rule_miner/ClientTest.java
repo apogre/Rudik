@@ -27,12 +27,12 @@ public class ClientTest
 {
   private final DynamicPruningRuleDiscovery rudik = new DynamicPruningRuleDiscovery();
   private final static Logger LOGGER = LoggerFactory.getLogger(ClientTest.class.getName());
-  private static final String export_path_all = "/home/apradhan/proj/fact_checking/LPmln/company_keyPerson/controlled/rudik_rules_all1000/";
-  private static final String export_path = "/home/apradhan/proj/fact_checking/LPmln/company_keyPerson/controlled/rudik_rules_compact/";
-  private static final String FILENAME_NEG_COMPACT = export_path+"keyPerson_neg.txt";
-  private static final String FILENAME_POS_COMPACT = export_path+"keyPerson_pos.txt";
-  private static final String FILENAME_NEG_ALL = export_path_all+"keyPerson_neg_all.txt";
-  private static final String FILENAME_POS_ALL = export_path_all+"keyPerson_pos_all.txt";
+  private static final String export_path_all = "/home/apradhan/proj/";
+  private static final String export_path = "/home/apradhan/proj/";
+  private static final String FILENAME_NEG_COMPACT = export_path+"capital_neg.txt";
+  private static final String FILENAME_POS_COMPACT = export_path+"birthPlace_pos.txt";
+  private static final String FILENAME_NEG_ALL = export_path_all+"capital_neg_all.txt";
+  private static final String FILENAME_POS_ALL = export_path_all+"capital_pos_all.txt";
   
   
   
@@ -63,16 +63,16 @@ public class ClientTest
   protected List<HornRule> executeRudikNegativeRules(final Set<String> relationNames, final String subjectType, final String objectType){
     final Instant startTime = Instant.now();
     
-    //get positive and negative examples
-//    final Set<Pair<String,String>> negativeExamples = rudik.
-//        generateNegativeExamples(relationNames, subjectType, objectType, false, false);
-//    final Set<Pair<String,String>> positiveExamples = rudik.
-//        generatePositiveExamples(relationNames, subjectType, objectType);
+//    get positive and negative examples
+    final Set<Pair<String,String>> negativeExamples = rudik.
+        generateNegativeExamples(relationNames, subjectType, objectType, false, false);
+    final Set<Pair<String,String>> positiveExamples = rudik.
+        generatePositiveExamples(relationNames, subjectType, objectType);
     
-    String csvFile_positive = "keyPerson_pos.csv";
-    String csvFile_negative = "keyPerson_neg.csv";
-    final Set<Pair<String,String>> negativeExamples = getExamples(csvFile_negative);
-    final Set<Pair<String,String>> positiveExamples = getExamples(csvFile_positive);
+//    String csvFile_positive = "keyPerson_pos.csv";
+//    String csvFile_negative = "keyPerson_neg.csv";
+//    final Set<Pair<String,String>> negativeExamples = getExamples(csvFile_negative);
+//    final Set<Pair<String,String>> positiveExamples = getExamples(csvFile_positive);
 
     //compute outputs
     final List<HornRule> outputRules = rudik.
@@ -105,15 +105,15 @@ public class ClientTest
 	    final Instant startTime = Instant.now();
 	    
 	    //get positive and negative examples
-//	    final Set<Pair<String,String>> negativeExamples = rudik.
-//	        generateNegativeExamples(relationNames, subjectType, objectType, false, false);
-//	    final Set<Pair<String,String>> positiveExamples = rudik.
-//	        generatePositiveExamples(relationNames, subjectType, objectType);
-//	    
-	    String csvFile_positive = "keyPerson_pos.csv";
-	    String csvFile_negative = "keyPerson_neg.csv";
-	    final Set<Pair<String,String>> negativeExamples = getExamples(csvFile_negative);
-	    final Set<Pair<String,String>> positiveExamples = getExamples(csvFile_positive);
+	    final Set<Pair<String,String>> negativeExamples = rudik.
+	        generateNegativeExamples(relationNames, subjectType, objectType, false, false);
+	    final Set<Pair<String,String>> positiveExamples = rudik.
+	        generatePositiveExamples(relationNames, subjectType, objectType);
+	    
+//	    String csvFile_positive = "keyPerson_pos.csv";
+//	    String csvFile_negative = "keyPerson_neg.csv";
+//	    final Set<Pair<String,String>> negativeExamples = getExamples(csvFile_negative);
+//	    final Set<Pair<String,String>> positiveExamples = getExamples(csvFile_positive);
 	    
 	    final List<HornRule> outputRules = rudik.discoverPositiveHornRules(negativeExamples, positiveExamples, relationNames, subjectType, objectType);
 	    //compute outputs
@@ -186,15 +186,15 @@ public class ClientTest
   protected Map<HornRule,Double> executeRudikAllPositiveRules(final Set<String> relationNames, final String subjectType, final String objectType, final int maxRulesNumber){
 	    final Instant startTime = Instant.now();   
 	    //get positive and negative examples
-//	    final Set<Pair<String,String>> negativeExamples = rudik.
-//	        generateNegativeExamples(relationNames, subjectType, objectType, false, false);
-//	    final Set<Pair<String,String>> positiveExamples = rudik.
-//	        generatePositiveExamples(relationNames, subjectType, objectType);
+	    final Set<Pair<String,String>> negativeExamples = rudik.
+	        generateNegativeExamples(relationNames, subjectType, objectType, false, false);
+	    final Set<Pair<String,String>> positiveExamples = rudik.
+	        generatePositiveExamples(relationNames, subjectType, objectType);
 	    
-	    String csvFile_positive = "keyPerson_pos.csv";
-	    String csvFile_negative = "keyPerson_neg.csv";
-	    final Set<Pair<String,String>> negativeExamples = getExamples(csvFile_negative);
-	    final Set<Pair<String,String>> positiveExamples = getExamples(csvFile_positive);
+//	    String csvFile_positive = "birthPlace_pos.csv";
+//	    String csvFile_negative = "birthPlace_neg.csv";
+//	    final Set<Pair<String,String>> negativeExamples = getExamples(csvFile_negative);
+//	    final Set<Pair<String,String>> positiveExamples = getExamples(csvFile_positive);
 	    
 	    final Map<HornRule, Double> outputRules = rudik.discoverAllPositiveHornRules(negativeExamples, positiveExamples, relationNames, subjectType, objectType, maxRulesNumber); 
 	    
