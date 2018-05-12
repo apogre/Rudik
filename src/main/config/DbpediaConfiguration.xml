@@ -12,8 +12,8 @@
 			<score>
 				<validation_threshold>0.2</validation_threshold>
 				<!-- set weights for the score computation. Default 0.3, 0.6, 0.1 -->
-				<alpha>0.3</alpha>
-				<beta>0.7</beta>
+				<alpha>0.4</alpha>
+				<beta>0.6</beta>
 				<gamma>0</gamma>
 			</score>
 		</runtime>
@@ -71,15 +71,15 @@
 			<limits>
 				<edges>
 					<!-- Limit incoming edges for an entity. -1 for unlimited -->
-					<subject>-1</subject>
+					<subject>1000</subject>
 					<!-- Limit outgoing edges for an entity. -1 for unlimited -->
-					<object>-1</object>
+					<object>1000</object>
 				</edges>
 				<examples>
 					<!-- Limit positive examples. -1 for unlimited -->
-					<positive>-1</positive>
+					<positive>1000</positive>
 					<!-- Limit negative examples. -1 for unlimited -->
-					<negative>-1</negative>
+					<negative>1000</negative>
 				</examples>
 			</limits>
 			<include_literals>true</include_literals>

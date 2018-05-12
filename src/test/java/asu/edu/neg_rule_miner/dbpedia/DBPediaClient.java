@@ -24,26 +24,26 @@ public class DBPediaClient extends ClientTest{
   
 //  @Test
 //  public void testSpouseNegative() {
-//    final Set<String> relations = Sets.newHashSet("http://dbpedia.org/ontology/birthPlace");
-//    final String typeSubject = "http://dbpedia.org/ontology/Company";
+//    final Set<String> relations = Sets.newHashSet("http://dbpedia.org/ontology/author");
+//    final String typeSubject = "http://dbpedia.org/ontology/Work";
 //    final String typeObject = "http://dbpedia.org/ontology/Person";
 //    Assert.assertNotNull(super.executeRudikNegativeRules(relations, typeSubject, typeObject)); 
 //  }
   
   @Test
   public void testSpousePositive() {
-    final Set<String> relations = Sets.newHashSet("http://dbpedia.org/ontology/birthPlace");
-    final String typeSubject = "http://dbpedia.org/ontology/Person";
-    final String typeObject = "http://dbpedia.org/ontology/Location";
+    final Set<String> relations = Sets.newHashSet("http://dbpedia.org/ontology/author");
+    final String typeSubject = "http://dbpedia.org/ontology/Work";
+    final String typeObject = "http://dbpedia.org/ontology/Person";
     Assert.assertNotNull(super.executeRudikPositiveRules(relations, typeSubject, typeObject)); 
   }
   
 //  @Test
 //  public void testSpouseAllNegative() {
 //    //target relations to be discovered
-//    final Set<String> relations = Sets.newHashSet("http://dbpedia.org/ontology/keyPerson");
+//    final Set<String> relations = Sets.newHashSet("http://dbpedia.org/ontology/spouse");
 //    //type of the subject according to the ontology
-//    final String typeSubject = "http://dbpedia.org/ontology/Company";
+//    final String typeSubject = "http://dbpedia.org/ontology/Person";
 //    //type of the object according to the ontology
 //    final String typeObject = "http://dbpedia.org/ontology/Person";
 //    //max number of rules to have in output. If set to a negative number, it will return all the ruls
@@ -54,13 +54,13 @@ public class DBPediaClient extends ClientTest{
 //  @Test
 //  public void testSpouseAllPositive() {
 //    //target relations to be discovered
-//    final Set<String> relations = Sets.newHashSet("http://dbpedia.org/ontology/capital");
+//    final Set<String> relations = Sets.newHashSet("http://dbpedia.org/ontology/spouse");
 //    //type of the subject according to the ontology
-//    final String typeSubject = "http://dbpedia.org/ontology/Location";
+//    final String typeSubject = "http://dbpedia.org/ontology/Person";
 //    //type of the object according to the ontology
-//    final String typeObject = "http://dbpedia.org/ontology/Location";
+//    final String typeObject = "http://dbpedia.org/ontology/Person";
 //    //max number of rules to have in output. If set to a negative number, it will return all the ruls
-//    final int maxRulesNumber = 500;
+//    final int maxRulesNumber = 10;
 //    Assert.assertNotNull(super.executeRudikAllPositiveRules(relations, typeSubject, typeObject,maxRulesNumber));
 //  }
 
