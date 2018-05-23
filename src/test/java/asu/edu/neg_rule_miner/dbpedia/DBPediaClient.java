@@ -49,21 +49,21 @@ public class DBPediaClient extends ClientTest{
   }
   
   
-  @Test
-  public void testSpouseNegative() {
-  	List<String> tripleList = input_predicates(data_path);
-  	String prefix = "http://dbpedia.org/ontology/";
-  	for (int i = 0; i < tripleList.size(); i++){
-  		String[] triple = tripleList.get(i).split(",");
-  		final Set<String> relations = Sets.newHashSet(prefix+triple[1]);
-	    final String typeSubject = prefix+triple[0];
-	    final String typeObject = prefix+triple[2];
-	    String[] sizes = {"1k","5k","10k"};
-	    for (String size: sizes){
-	    	Assert.assertNotNull(super.executeRudikNegativeRules(relations, typeSubject, typeObject,triple[1],size)); 
-		    }	  		
-	  	}
-	  	}
+//  @Test
+//  public void testSpouseNegative() {
+//  	List<String> tripleList = input_predicates(data_path);
+//  	String prefix = "http://dbpedia.org/ontology/";
+//  	for (int i = 0; i < tripleList.size(); i++){
+//  		String[] triple = tripleList.get(i).split(",");
+//  		final Set<String> relations = Sets.newHashSet(prefix+triple[1]);
+//	    final String typeSubject = prefix+triple[0];
+//	    final String typeObject = prefix+triple[2];
+//	    String[] sizes = {"1k","5k","10k"};
+//	    for (String size: sizes){
+//	    	Assert.assertNotNull(super.executeRudikNegativeRules(relations, typeSubject, typeObject,triple[1],size)); 
+//		    }	  		
+//	  	}
+//	  	}
   
   
   @Test
@@ -77,6 +77,7 @@ public class DBPediaClient extends ClientTest{
 	    final String typeSubject = prefix+triple[0];
 	    final String typeObject = prefix+triple[2];
 	    String[] sizes = {"1k","5k","10k"};
+//	    String[] sizes = {"1k","5k"};
 	    for (String size: sizes){
 	    	Assert.assertNotNull(super.executeRudikPositiveRules(relations, typeSubject, typeObject, triple[1],size));
 	    }
@@ -85,28 +86,38 @@ public class DBPediaClient extends ClientTest{
 //  
 //  @Test
 //  public void testSpouseAllNegative() {
-//    //target relations to be discovered
-//    final Set<String> relations = Sets.newHashSet("http://dbpedia.org/ontology/spouse");
-//    //type of the subject according to the ontology
-//    final String typeSubject = "http://dbpedia.org/ontology/Person";
-//    //type of the object according to the ontology
-//    final String typeObject = "http://dbpedia.org/ontology/Person";
-//    //max number of rules to have in output. If set to a negative number, it will return all the ruls
-//    final int maxRulesNumber = 1000;
-//    Assert.assertNotNull(super.executeRudikAllNegativeRules(relations, typeSubject, typeObject,maxRulesNumber)); 
-//  }
+//		List<String> tripleList = input_predicates(data_path);
+//		String prefix = "http://dbpedia.org/ontology/";	
+//		for (int i = 0; i < tripleList.size(); i++){
+//			String[] triple = tripleList.get(i).split(",");
+//		    final Set<String> relations = Sets.newHashSet(prefix+triple[1]);
+//		    final String typeSubject = prefix+triple[0];
+//		    final String typeObject = prefix+triple[2];
+////		    String[] sizes = {"1k","5k","10k"};
+//		    String[] sizes = {"15k"};
+//		    final int maxRulesNumber = 40;
+//		    for (String size: sizes){
+//		    	Assert.assertNotNull(super.executeRudikAllNegativeRules(relations, typeSubject, typeObject,maxRulesNumber, triple[1],size));
+//		    }
+//		}
+//		}
 //  
 //  @Test
 //  public void testSpouseAllPositive() {
-//    //target relations to be discovered
-//    final Set<String> relations = Sets.newHashSet("http://dbpedia.org/ontology/spouse");
-//    //type of the subject according to the ontology
-//    final String typeSubject = "http://dbpedia.org/ontology/Person";
-//    //type of the object according to the ontology
-//    final String typeObject = "http://dbpedia.org/ontology/Person";
-//    //max number of rules to have in output. If set to a negative number, it will return all the ruls
-//    final int maxRulesNumber = 10;
-//    Assert.assertNotNull(super.executeRudikAllPositiveRules(relations, typeSubject, typeObject,maxRulesNumber));
-//  }
+//	List<String> tripleList = input_predicates(data_path);
+//	String prefix = "http://dbpedia.org/ontology/";	
+//	for (int i = 0; i < tripleList.size(); i++){
+//		String[] triple = tripleList.get(i).split(",");
+//	    final Set<String> relations = Sets.newHashSet(prefix+triple[1]);
+//	    final String typeSubject = prefix+triple[0];
+//	    final String typeObject = prefix+triple[2];
+////	    String[] sizes = {"1k","5k","10k"};
+//	    String[] sizes = {"15k"};
+//	    final int maxRulesNumber = 20;
+//	    for (String size: sizes){
+//	    	Assert.assertNotNull(super.executeRudikAllPositiveRules(relations, typeSubject, typeObject,maxRulesNumber, triple[1],size));
+//	    }
+//	}
+// }
 
 }

@@ -77,9 +77,9 @@
 				</edges>
 				<examples>
 					<!-- Limit positive examples. -1 for unlimited -->
-					<positive>1000</positive>
+					<positive>-1</positive>
 					<!-- Limit negative examples. -1 for unlimited -->
-					<negative>1000</negative>
+					<negative>-1</negative>
 				</examples>
 			</limits>
 			<include_literals>true</include_literals>

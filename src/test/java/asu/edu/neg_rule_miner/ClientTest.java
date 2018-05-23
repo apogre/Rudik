@@ -29,8 +29,8 @@ public class ClientTest
   private final static Logger LOGGER = LoggerFactory.getLogger(ClientTest.class.getName());
   private static final String export_path_all = "/home/apradhan/sampled_rudik_rules/";
   private static final String export_path = "/home/apradhan/sampled_rudik_rules/";
-  private static final String predicate = "author";
-  private static final String data_size = "1k";
+  private static final String predicate = "spouse";
+  private static final String data_size = "5k";
   private static final String input_path = "/home/apradhan/proj/fact_check_kb/dataset/"+predicate+"/input/";
   private static final String FILENAME_NEG_COMPACT = input_path+predicate+"_neg_"+data_size+".txt";
   private static final String FILENAME_POS_COMPACT = input_path+predicate+"_pos_"+data_size+".txt";
@@ -73,6 +73,7 @@ public class ClientTest
 //        generateNegativeExamples(relationNames, subjectType, objectType, false, false);
 //    final Set<Pair<String,String>> positiveExamples = rudik.
 //        generatePositiveExamples(relationNames, subjectType, objectType);
+    
     final String path = "/home/apradhan/proj/fact_check_kb/dataset/"+rel;
     final String output_path = path+"/rules/rudik/"+rel+"_neg_"+size+".csv";
     
@@ -88,6 +89,7 @@ public class ClientTest
     
     final Instant endTime = Instant.now();
     LOGGER.info("----------------------------COMPUTATION ENDED----------------------------");
+    LOGGER.info("Relation: {}",(output_path));
     LOGGER.info("Final computation time: {} seconds.",(endTime.toEpochMilli()-startTime.toEpochMilli())/1000.);
     LOGGER.info("----------------------------Final output rules----------------------------");
     for(final HornRule oneRule:outputRules){
@@ -132,6 +134,7 @@ public class ClientTest
 	    	    
 	    final Instant endTime = Instant.now();
 	    LOGGER.info("----------------------------COMPUTATION ENDED----------------------------");
+	    LOGGER.info("Relation: {}",(output_path));
 	    LOGGER.info("Final computation time: {} seconds.",(endTime.toEpochMilli()-startTime.toEpochMilli())/1000.);
 	    LOGGER.info("----------------------------Final output rules----------------------------");
 	    for(final HornRule oneRule:outputRules){
@@ -153,7 +156,7 @@ public class ClientTest
 	    return outputRules;
 	  }
   
-  protected Map<HornRule,Double> executeRudikAllNegativeRules(final Set<String> relationNames, final String subjectType, final String objectType, final int maxRulesNumber){
+  protected Map<HornRule,Double> executeRudikAllNegativeRules(final Set<String> relationNames, final String subjectType, final String objectType, final int maxRulesNumber,final String rel, final String size){
     final Instant startTime = Instant.now();
     
 //    get positive and negative examples
@@ -162,11 +165,14 @@ public class ClientTest
 //    final Set<Pair<String,String>> positiveExamples = rudik.
 //        generatePositiveExamples(relationNames, subjectType, objectType);
     
-    String csvFile_positive = input_path+"positive_examples_10000.csv";
-    String csvFile_negative = input_path+"negative_examples_10000.csv";
+    final String path = "/home/apradhan/proj/fact_check_kb/dataset/"+rel;
+    final String output_path = path+"/rules/rudik/"+rel+"_neg_"+size+"_"+maxRulesNumber+".csv";
+    
+    
+    String csvFile_positive = path+"/input/positive_examples_"+size+".csv";
+    String csvFile_negative = path+"/input/negative_examples_"+size+".csv";
     final Set<Pair<String,String>> negativeExamples = getExamples(csvFile_negative);
     final Set<Pair<String,String>> positiveExamples = getExamples(csvFile_positive);
-
 
     //compute outputs
     final Map<HornRule,Double> outputRules = rudik.
@@ -179,7 +185,7 @@ public class ClientTest
     for(final HornRule oneRule:outputRules.keySet()){
       LOGGER.info("Rule:{}\tScore:{}",oneRule,outputRules.get(oneRule));
       try{
-    	  fw = new FileWriter(FILENAME_NEG_ALL, true);
+    	  fw = new FileWriter(output_path, true);
     	  bw = new BufferedWriter(fw);
     	  bw.write(oneRule.toString()+","+String.format("%.5f",outputRules.get(oneRule))+"\n");
       }catch (IOException e){
@@ -195,7 +201,7 @@ public class ClientTest
     return outputRules;
   }
   
-  protected Map<HornRule,Double> executeRudikAllPositiveRules(final Set<String> relationNames, final String subjectType, final String objectType, final int maxRulesNumber){
+  protected Map<HornRule,Double> executeRudikAllPositiveRules(final Set<String> relationNames, final String subjectType, final String objectType, final int maxRulesNumber,final String rel, final String size ){
 	    final Instant startTime = Instant.now();   
 	    //get positive and negative examples
 //	    final Set<Pair<String,String>> negativeExamples = rudik.
@@ -203,8 +209,12 @@ public class ClientTest
 //	    final Set<Pair<String,String>> positiveExamples = rudik.
 //	        generatePositiveExamples(relationNames, subjectType, objectType);
 	    
-	    String csvFile_positive = input_path+"positive_examples_10000.csv";
-	    String csvFile_negative = input_path+"negative_examples_10000.csv";
+	    final String path = "/home/apradhan/proj/fact_check_kb/dataset/"+rel;
+	    final String output_path = path+"/rules/rudik/"+rel+"_pos_"+size+"_"+maxRulesNumber+".csv";
+	    
+	    
+	    String csvFile_positive = path+"/input/positive_examples_"+size+".csv";
+	    String csvFile_negative = path+"/input/negative_examples_"+size+".csv";
 	    final Set<Pair<String,String>> negativeExamples = getExamples(csvFile_negative);
 	    final Set<Pair<String,String>> positiveExamples = getExamples(csvFile_positive);
 	    
@@ -217,7 +227,7 @@ public class ClientTest
 	    for(final HornRule oneRule:outputRules.keySet()){
 	      LOGGER.info("Rule:{}\tScore:{}",oneRule,outputRules.get(oneRule));
 	      try{
-	    	  fw = new FileWriter(FILENAME_POS_ALL, true);
+	    	  fw = new FileWriter(output_path, true);
 	    	  bw = new BufferedWriter(fw);
 	    	  bw.write(oneRule.toString()+","+String.format("%.5f",outputRules.get(oneRule))+"\n");
 	      }catch (IOException e){
